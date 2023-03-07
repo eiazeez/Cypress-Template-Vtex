@@ -1,0 +1,17 @@
+{
+  "name": "projeto-template",
+  "version": "1.0.0",
+  "description": "template codeby",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "keywords": [
+    "template"
+  ],
+  "author": "azeez",
+  "license": "MIT",
+  "dependencies": {
+    "cypress": "^12.7.0"
+  }
+}
