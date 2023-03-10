@@ -1,5 +1,5 @@
 import { el } from './elements'
-import HeaderFunctions from '../../components/header/'
+import Shelf from '../../components/shelf'
 
 const HomePage = {
 
@@ -10,10 +10,29 @@ const HomePage = {
         cy.get('body[class=bg-base]').should('be.visible')
     },
 
-    shouldNotHaveXScroll: () => {
-        
+    verifySideScroll: () => { 
         cy.scrollTo("topRight");
         cy.window().its("scrollX").should("equal", 0);
+
+    },
+
+    verifyMainBanner: () => {
+        cy.get(el.sectionMainBanner)
+          .should('be.visible')  
+    },
+
+    verifyShelfs: ()=> {
+
+        const shelfElements = [
+            'Title',
+            'Price',
+            'Img',
+            'BuyButton'
+        ]
+
+        shelfElements.forEach(function (element) {
+            Shelf[`verify${element}`] ()
+        })
 
     },
 
