@@ -30,7 +30,7 @@ describe('TESTES DIRECIONADOS A HOME PAGE', () => {
 
   })  
 
-  context.only('Para validar a home do site', function () {
+  context('Para validar a home do site', function () {
     
     const homeElements = [
       'SideScroll',
@@ -51,6 +51,45 @@ describe('TESTES DIRECIONADOS A HOME PAGE', () => {
 
   })
 
- 
+  context('Para validar a funcionalidade de Localização', function () {
+  
+    const cepsRuins = [
+      '52315471',
+      '333333331',
+      '123412356'
+    ]
+
+    cepsRuins.forEach(function(ceps) {
+
+      it('O sistema não deve aceitar ceps inválidos como: ' + ceps, function () {
+      
+        HomePage.go()
+        Header.openLocationModal()
+        Header.formLocation(ceps)
+        Header.errorShouldHaveText('CEP inválido')
+
+      })
+
+    })
+
+    const address = {
+      cep: '01414000',
+      road: 'Rua Haddock Lobo - São Paulo - SP'
+    }
+    
+
+    it('O sistema deve aceitar cep válido como: ' + address.cep, function () {
+      
+      HomePage.go()
+      Header.openLocationModal()
+      Header.formLocation(address.cep)
+      Header.addressShouldBe(address.road)
+      Header.confirmAddress()
+      Header.openLocationModal()
+      Header.addressShouldBe(address.road)
+
+    })
+    
+  })
 
 })

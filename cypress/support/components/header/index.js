@@ -24,7 +24,7 @@ const Header = {
     },
 
     verifyRegionModal: () => {
-        cy.contains(el.locationButton)
+        cy.get(el.locationButton)
           .should('be.visible')
     },
 
@@ -36,19 +36,42 @@ const Header = {
     verifyLogin: () => {
         cy.get(el.loginButton)
           .should('be.visible')
-  },
+    },
 
     verifyCart: () => {
         cy.get(el.cartButton)
           .should('be.visible')  
     },
 
-    verifyElement: (element) => {
+    openLocationModal: () => {
+      cy.scrollTo('top')
+      cy.wait(2000) 
+      cy.get(el.locationButton)
+        .contains('button', 'Localização')
+        .click( {force: true} )   
 
-      cy.get(element).should('be.visible')
+    },
 
+    formLocation: (cep) => {
+      cy.get(el.cepInputModal)
+        .clear()
+        .type(cep)
+    },
+
+    errorShouldHaveText: (text) => {
+      cy.get(el.cepInfoError)
+        .should('have.text', text)
+    },
+
+    addressShouldBe: (text) => {
+      cy.get(el.address)
+        .should('have.text', text)
+    },
+
+    confirmAddress: () => {
+      cy.get(el.confirmAddress)
+        .click()
     }
-
     
 }
 
